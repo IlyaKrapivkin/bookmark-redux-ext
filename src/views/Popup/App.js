@@ -1,25 +1,51 @@
-import React from 'react'
-import './App.css'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Header } from 'semantic-ui-react';
+import {
+  accountAuth, accountProfile, accountLogout
+} from '../../actions/account';
+import { setEnabled, setStats } from '../../actions/marker';
+import Authed from './Authed';
+import Unauthed from './Unauthed';
+import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>Popup page</p>
-        <p>
-          Edit <code>src/views/Popup/App.js</code> and save.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    const { token } = this.props;
+    const View = token? Authed : Unauthed;
+    return (
+      <div className='App'>
+        <Header as='h3' attached='top' textAlign='center' inverted color='teal'>
+          Keyword Marker
+        </Header>
+        <div className='App-view'>
+          <View {...this.props}/>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default App
+const mapStateToProps = state => Object.assign(
+  {}, state.account, state.marker
+);
+
+const mapDispatchToProps = dispatch => ({
+  accountAuth: data => {
+    dispatch(accountAuth(data));
+  },
+  accountProfile: data => {
+    dispatch(accountProfile(data));
+  },
+  accountLogout: () => {
+    dispatch(accountLogout());
+  },
+  setEnabled: data => {
+    dispatch(setEnabled(data));
+  },
+  setStats: data => {
+    dispatch(setStats(data));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
