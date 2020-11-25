@@ -59,8 +59,15 @@ const style = settings => {
 const updateStats = (store) => {
   stats && store.dispatch(setStats(stats));
 };
-
+// *********************************************************
 (async () => {
+  chrome.runtime.onMessage.addListener( data => {
+    // if current tab received focus, apply mark/unmark operations (if any),
+    // then, if there was no mark operation, update marker stats
+    data && data.id === 'tabFocusPass' &&
+    !render(store) && updateStats(store);
+  });
+  // ***********
   const store = await storeCreatorFactory({createStore})(reducers);
   store.subscribe(() => {
     render(store, document.hidden);
