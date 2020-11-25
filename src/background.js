@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import storeCreatorFactory from 'reduxed-chrome-storage';
 import reducers from './reducers';
 import { accountLogout, setStats, setIconHash } from './actions';
-
+// *************************************************************************
 const storeCreator = storeCreatorFactory({createStore});
 let store;
 const getStore = async () => {
@@ -11,17 +11,18 @@ const getStore = async () => {
   store = await storeCreator(reducers);
   return store;
 };
-
+// *************************************************************************
 const iconVariants = [
   {
-    '16' : 'icon-outlined-16.png',
-    '32' : 'icon-outlined-32.png'
+    '16' : 'icon5off.png',
+    '32' : 'icon5off.png'
   },
   {
-    '16' : 'icon-filled-16.png',
-    '32' : 'icon-filled-32.png'
+    '16' : 'icon5on.png',
+    '32' : 'icon5on.png'
   }
 ];
+// *************************************************************************
 const displayIcon = (store) => {
   const state = store.getState();
   const {account, marker} = state;
@@ -35,7 +36,7 @@ const displayIcon = (store) => {
   chrome.browserAction.setIcon({path: iconVariants[token? 1: 0]});
   chrome.browserAction.setBadgeText({text});
 };
-
+// *************************************************************************
 chrome.runtime.onStartup.addListener(async () => {
   const store = await getStore();
   // reset user session:

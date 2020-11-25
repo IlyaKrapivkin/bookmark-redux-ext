@@ -22,12 +22,16 @@
     "matches": ["<all_urls>"]
   }],
   "icons": {
-    "16": "icon4.png",
-    "32": "icon4.png",
-    "64": "icon4.png",
-    "128": "icon4.png"
+    "16": "icon5off.png",
+    "32": "icon5off.png",
+    "64": "icon5off.png",
+    "128": "icon5off.png"
   },
   "browser_action": {
+    "default_icon": {
+      "16": "icon5off.png",
+      "32": "icon5off.png"
+    },
     "default_title": "bookmark-redux-ext1",
     "default_popup": "popup.html"
   },
