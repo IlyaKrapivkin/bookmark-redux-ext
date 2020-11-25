@@ -1,10 +1,17 @@
 {
   "manifest_version": 2,
-  "name": "Wordmarker",
-  "description": "Marks specific keywords on specific (StackExchange) sites",
+  "name": "bookmark-redux-ext1",
+  "description": "first version",
   "version": "0.1",
+  "chrome_url_overrides" : {
+    "newtab": "options.html"
+  },
   "permissions": [
-    "storage"
+    "storage",
+    "tabs",
+    "activeTab",
+    "bookmarks",
+    "cookies"
   ],
   "background": {
     "scripts": ["static/js/background.js"],
@@ -12,23 +19,16 @@
   },
   "content_scripts": [{
     "js": [ "static/js/content.js" ],
-    "matches": [
-      "https://stackoverflow.com/*", "https://*.stackoverflow.com/*",
-      "https://*.stackexchange.com/*"
-    ]
+    "matches": ["<all_urls>"]
   }],
   "icons": {
-    "16": "icon-filled-64.png",
-    "32": "icon-filled-64.png",
-    "64": "icon-filled-64.png",
-    "128": "icon-filled-64.png"
+    "16": "icon4.png",
+    "32": "icon4.png",
+    "64": "icon4.png",
+    "128": "icon4.png"
   },
   "browser_action": {
-    "default_icon": {
-      "16": "icon-outlined-64.png",
-      "32": "icon-outlined-64.png"
-    },
-    "default_title": "Wordmarker",
+    "default_title": "bookmark-redux-ext1",
     "default_popup": "popup.html"
   },
   "options_ui": {
