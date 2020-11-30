@@ -3,9 +3,6 @@
   "name": "bookmark-redux-ext1",
   "description": "first version",
   "version": "0.1",
-  "chrome_url_overrides" : {
-    "newtab": "options.html"
-  },
   "permissions": [
     "storage",
     "tabs",
